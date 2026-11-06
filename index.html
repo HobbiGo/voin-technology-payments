@@ -1,390 +1,47 @@
-<!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOIN Technology Payments - Master Platform</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            background-color: #080b14;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-        }
-        .glow-box {
-            background: linear-gradient(135deg, rgba(20, 20, 45, 0.7), rgba(10, 15, 30, 0.9));
-            border: 1px solid rgba(139, 92, 246, 0.25);
-            box-shadow: 0 0 25px rgba(139, 92, 246, 0.12);
-        }
-        /* Visual polish only: existing section order and payment state retained. */
-        html { scroll-padding-top: 7rem; }
-        body {
-            background-image: radial-gradient(ellipse at 12% 5%, rgba(34, 211, 238, .045), transparent 38%), radial-gradient(ellipse at 90% 30%, rgba(139, 92, 246, .075), transparent 45%);
-            line-height: 1.6;
-        }
-        .glow-box {
-            border-color: rgba(167, 139, 250, .28);
-            box-shadow: 0 0 24px rgba(139, 92, 246, .08), inset 0 1px 0 rgba(255, 255, 255, .035);
-        }
-        .glow-box p { overflow-wrap: anywhere; }
-        a:focus-visible, button:focus-visible, summary:focus-visible {
-            outline: 2px solid #67e8f9;
-            outline-offset: 4px;
-        }
-        #presale .space-y-2 > .flex { gap: 1rem; align-items: baseline; }
-        #presale .space-y-2 > .flex > span:last-child { flex-shrink: 0; text-align: right; }
-        #transparency .glow-box { border-top-color: rgba(103, 232, 249, .35); }
-        #transparency .glow-box:last-child { border-top-color: rgba(167, 139, 250, .5); }
-        .payment-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 1.4rem; color: #9ca3af; font-size: .75rem; }
-        .payment-steps li { display: flex; align-items: center; gap: .4rem; }
-        .payment-steps span { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border: 1px solid rgba(167, 139, 250, .4); border-radius: 50%; color: #c4b5fd; }
-        .mobile-menu { position: relative; }
-        .mobile-menu nav { position: absolute; right: 0; top: 2.3rem; min-width: 12rem; padding: .75rem; background: #101323; border: 1px solid #4c3576; border-radius: .75rem; box-shadow: 0 12px 32px #0008; }
-        .mobile-menu nav a { display: block; padding: .5rem .75rem; color: #e5e7eb; font-size: .8rem; }
-        @media (max-width: 639px) {
-            header { padding-left: 1rem !important; padding-right: 1rem !important; gap: .75rem; }
-            header > div:first-child { gap: .5rem; }
-            header > div:first-child > span { max-width: 10rem; font-size: .65rem; }
-            main { padding-top: 1.5rem !important; }
-            #hero > .flex:last-child { flex-wrap: wrap; }
-            #presale .grid.grid-cols-2 > .flex { flex-wrap: wrap; gap: .35rem; }
-        }
-        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } }
-        /* Account layout follows the supplied VOIN dashboard reference. */
-        .voin-dashboard { padding: 2rem; border: 1px solid rgba(103,232,249,.4); border-radius: 1rem; background: linear-gradient(135deg,rgba(9,19,31,.97),rgba(18,16,36,.94)); box-shadow: 0 0 35px rgba(103,232,249,.04); }
-        .dashboard-heading { margin-bottom: 1.5rem; }
-        .dashboard-eyebrow { font-size: .62rem; color: #a5a8bd; letter-spacing: .16em; margin-bottom: .5rem; }
-        .dashboard-heading h2 { font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 600; }
-        .dashboard-top { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 1.5rem; }
-        .wallet-panel,.dashboard-metric,.order-panel { background: linear-gradient(125deg,rgba(255,255,255,.065),rgba(139,92,246,.045)); border: 1px solid rgba(185,193,219,.34); border-radius: .65rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
-        .wallet-panel { padding: 1.7rem 1rem; text-align: center; border-top-color: rgba(103,232,249,.7); }
-        .wallet-title { font-size: .95rem; color: #e5e7eb; }
-        .wallet-connect { display: inline-block; margin: 1rem 0 .65rem; padding: .55rem 1.1rem; border-radius: .4rem; background: linear-gradient(110deg,#67e8f9,#a78bfa); color: #101323; font-size: .8rem; font-weight: 600; cursor: not-allowed; }
-        .wallet-note { font-size: .68rem; color: #bcc0cf; }
-        .wallet-preview { margin-top: .5rem; font-size: .65rem; color: #a5a8bd; }
-        .dashboard-emblem { display: flex; justify-content: center; }
-        .dashboard-emblem svg { width: min(100%,300px); height: auto; }
-        .dashboard-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .8rem; margin: 1rem 0; }
-        .dashboard-metric { padding: .95rem .8rem; }
-        .dashboard-metric h3 { font-size: .67rem; color: #b7bdce; min-height: 2.1em; }
-        .dashboard-metric p { font-size: 1rem; margin-top: .35rem; color: #e5e7eb; }
-        .order-panel { display: grid; grid-template-columns: minmax(0,1fr) 12rem; min-height: 14rem; padding: 1rem; gap: 1rem; }
-        .order-empty { display: flex; flex-direction: column; }
-        .order-empty h3 { font-size: .9rem; }
-        .order-empty-message { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 1.5rem .5rem; font-size: .8rem; color: #d1d5db; }
-        .order-empty-message span { color: #9ca3af; font-size: .65rem; margin-top: .5rem; }
-        .order-stages { border-left: 1px solid rgba(185,193,219,.2); padding-left: 1.4rem; }
-        .order-stages > p { font-size: .63rem; color: #9ca3af; margin-bottom: .9rem; }
-        .order-stages ol { border-left: 1px solid #4b5067; margin-left: .3rem; }
-        .order-stages li { position: relative; padding: 0 0 1.15rem 1rem; color: #a5a8bd; font-size: .73rem; }
-        .order-stages li:last-child { padding-bottom: 0; }
-        .order-stages li::before { content: ''; position: absolute; left: -.35rem; top: .28rem; width: .65rem; height: .65rem; background: #24283d; border: 1px solid #697087; border-radius: 50%; }
-        .dashboard-security { text-align: center; font-size: .68rem; color: #a5a8bd; margin-top: 1.2rem; }
-        @media(max-width:639px) {
-            .voin-dashboard { padding: 1.15rem; }
-            .dashboard-top { grid-template-columns: 1fr; gap: .25rem; }
-            .dashboard-emblem svg { max-width: 210px; }
-            .dashboard-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
-            .order-panel { grid-template-columns: 1fr; }
-            .order-stages { border-left: 0; border-top: 1px solid rgba(185,193,219,.2); padding: 1rem .5rem .5rem; }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050d19">
+<title>VOIN Technology Payments | Jaringan & Pengembangan</title>
+<style>
+:root{color-scheme:dark;--bg:#050d19;--panel:#121c2b;--text:#eef4fb;--muted:#a8b4c7;--cyan:#53e6df;--violet:#bb8de9;--line:#304456}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:30px}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 Inter,Segoe UI,Arial,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit}a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--cyan);outline-offset:5px}h1,h2,h3,p{margin:0}h1,h2,h3{line-height:1.2;font-weight:600;letter-spacing:-.025em}h2{font-size:clamp(23px,2.3vw,30px);margin:8px 0 22px}h3{font-size:16px}.site{max-width:1440px;margin:auto;display:grid;grid-template-columns:minmax(0,1.95fr) minmax(300px,1fr);min-height:100vh}.main-column{min-width:0;border-right:1px solid #1b2b3e}.header{min-height:78px;display:flex;align-items:center;justify-content:space-between;padding:18px 34px;border-bottom:1px solid #152536;gap:24px}.brand{display:flex;gap:7px;align-items:center}.brand strong{font-size:25px;letter-spacing:-1px;color:#c3e7f8}.brand small{font-size:8px;line-height:1.25;letter-spacing:.04em}.nav{display:flex;gap:20px;font-size:11px;color:#c6d0df}.nav a:hover{color:var(--cyan)}.mobile-nav{display:none}.main-inner{padding:36px 34px 50px}.section{margin-bottom:58px}.eyebrow{font-size:10px;text-transform:uppercase;color:#99aabc;letter-spacing:.1em}.tag{display:inline-flex;border:1px solid #27515c;border-radius:20px;padding:3px 10px;background:#0b2028;color:#bceee6;font-size:9px}.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(190px,1fr);gap:8px;align-items:center;min-height:310px;margin-bottom:48px}.hero h1{font-size:clamp(26px,2.8vw,38px);margin:12px 0}.hero p{font-size:12px;color:var(--muted);max-width:370px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.pill{border-radius:30px;border:1px solid #40958f;padding:8px 15px;font-size:11px;box-shadow:0 0 12px #48e4de25}.pill.purple{border-color:#8e69aa;box-shadow:0 0 12px #bc80ec30}.hero-visual{text-align:center;min-width:0}.hero-visual .art{width:190px;height:174px;background-position:-240px -48px;margin:0 auto}.visual-note{font-size:9px;color:#9eb7c8;margin-top:8px}.art{background-image:url('voin-visual.png');background-repeat:no-repeat;background-size:671px 1000px;width:100px;height:88px;margin:0 auto;flex-shrink:0}.coins{background-position:-31px -298px}.hourglass{background-position:-164px -298px}.lock{background-position:-294px -298px}.network{background-position:-28px -548px}.review{background-position:-139px -548px}.wallet{background-position:-240px -548px}.tracking{background-position:-331px -548px}.gas{height:122px;background-position:-39px -789px}.invoice{height:122px;background-position:-169px -789px}.api{height:122px;background-position:-301px -789px}.document{width:66px;height:58px;background-position:-476px -777px}.audit{width:66px;height:58px;background-position:-575px -777px}
+.grid{display:grid;gap:14px}.three{grid-template-columns:repeat(3,minmax(0,1fr))}.four{grid-template-columns:repeat(4,minmax(0,1fr))}.card{background:linear-gradient(125deg,#18363c88,#182333 50%,#36203d88);border:1px solid #586579;border-top-color:#7facae;border-radius:8px;box-shadow:inset 1px 1px 6px #b3f5f318,0 0 15px #0003;text-align:center;overflow:hidden}.problem-card{padding:8px 9px 16px}.problem-card p{color:var(--muted);font-size:10px;margin-top:7px}.problem-card h3{font-size:13px}.highlight{margin-top:18px;padding:15px 12px;border:1px solid #5fe2da;border-right-color:#cb8bee;box-shadow:-3px 0 12px #39ddd340,3px 0 12px #a976de40;border-radius:7px;text-align:center;background:linear-gradient(110deg,#10313555,#41244844)}.highlight p{font-size:10px;color:var(--muted);margin-top:5px}.workflow .card{padding:8px 6px 17px}.workflow h3{font-size:12px;min-height:30px}.workflow p{font-size:9px;margin-top:7px;color:var(--muted)}.flow-note{font-size:11px;text-align:center;color:#b2d0db;margin-top:16px}.lanes{grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.lanes .highlight{margin-top:0;text-align:left;font-size:10px;padding:13px}.utilities .card{padding:8px 6px 18px}.utilities h3{font-size:15px;padding:4px 12px}.center{text-align:center}.center .tag{margin-top:18px}.sidebar{padding:34px 24px;background:linear-gradient(180deg,#07101d,#050d19)}.sidebar .section{margin-bottom:48px}.sidebar h2{font-size:25px}.timeline{position:relative;padding-left:20px}.timeline:before{content:'';position:absolute;left:5px;top:15px;bottom:20px;width:1px;background:linear-gradient(#58dfd9,#253446)}.phase{position:relative;margin-bottom:12px;background:linear-gradient(115deg,#17363a99,#1d2134 65%,#40274266);border:1px solid #59697a;border-radius:8px;padding:14px;box-shadow:inset 0 1px 5px #a4e8e214}.phase:before{content:'';position:absolute;left:-20px;top:16px;width:9px;height:9px;border:1px solid #546276;background:#182536;border-radius:50%}.phase:first-child:before{background:#51e4df;box-shadow:0 0 8px #51e4df}.phase h3{font-size:13px}.phase p{font-size:10px;color:#b8c8d2;margin-top:8px}.funding{display:flex;gap:10px;justify-content:space-between;margin-top:14px;font-size:8px;color:#a6b7c5}.batch{padding:16px;text-align:left}.batch h3{margin-bottom:13px}.batch-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 12px}.batch-grid div{font-size:10px}.batch-grid span{display:block;color:#aebdcb;font-size:9px;margin-bottom:4px}.batch-grid div:nth-child(n+3){border-top:1px solid #3d6d72;padding-top:10px}.tokenomics{margin-top:14px;padding:20px 12px;display:grid;grid-template-columns:1fr 104px 1fr;gap:10px;align-items:center;text-align:left}.donut{width:104px;height:104px;border-radius:50%;background:conic-gradient(#55dce1 0 50%,#8978d7 50% 60%,#b297dc 60% 70%,#7774c5 70% 81%,#c9baed 81% 85%,#ad7ce1 85% 100%);position:relative;box-shadow:0 0 14px #9976de22}.donut:after{content:'';position:absolute;inset:14px;border-radius:50%;background:#0c1624}.legend{display:grid;gap:13px;font-size:9px;color:#aebacb}.legend b{display:block;font-size:11px;font-weight:500;color:#edf2fa}.presale-status{text-align:center;margin-top:16px}.presale-status h3{font-size:14px}.presale-status p{font-size:9px;color:#abb8c8;margin:7px 0}.disabled{width:100%;border:1px solid #53606d;border-radius:22px;background:#62687655;color:#bac1cd;padding:9px;cursor:not-allowed;font-size:11px}.footnote{font-size:9px;color:#9caebf;margin-top:10px;line-height:1.6}.docs{grid-template-columns:1fr 1fr}.docs .card{padding:12px 6px}.docs h3{font-size:11px}.docs p{font-size:10px;color:#b3bdd0;margin-top:5px}.security{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin-top:17px}.security span{border:1px solid #344858;border-radius:16px;padding:3px 7px;font-size:8px;color:#bcc8d5}.dashboard-link{display:inline-block;margin-top:22px;padding:5px 12px;border:1px solid #344858;border-radius:7px;font-size:10px}.footer{border-top:1px solid #243346;padding-top:20px;text-align:center;color:#9cabbd;font-size:9px}.footer p+p{margin-top:6px}
+.account{grid-column:1/-1;border-top:1px solid #243346;padding:36px;max-width:1100px;width:100%;margin:auto}.account details{border:1px solid #385969;border-radius:12px;background:#0b1422}.account summary{cursor:pointer;padding:17px 22px;color:#c9eef0;font-size:15px}.account-content{padding:10px 22px 24px}.account-top{display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:20px}.signin{padding:25px;text-align:center}.signin p{font-size:11px;color:var(--muted);margin:10px 0}.signin button{width:auto;padding:8px 25px}.account .hero-visual .art{margin:auto}.metrics{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:20px}.metrics .card{padding:15px 8px}.metrics h3{font-size:10px;color:#aebed0}.metrics p{font-size:15px;margin-top:7px}.orders{display:grid;grid-template-columns:1fr 160px;padding:18px;text-align:left;margin-top:15px;gap:15px}.orders h3{font-size:14px}.empty{text-align:center;font-size:12px;color:#aebdcd;padding:36px 10px}.stages{font-size:10px;color:#aebdcd;border-left:1px solid #394653;padding-left:24px;line-height:2.8}.account .footnote{text-align:center}
+@media(min-width:1500px){.site{margin-top:24px;border:1px solid #1e3040;border-radius:15px;overflow:hidden}}
+@media(max-width:1000px){.site{grid-template-columns:minmax(0,1.6fr) minmax(280px,1fr)}.header,.main-inner{padding-left:22px;padding-right:22px}.nav{gap:10px;font-size:10px}.hero{grid-template-columns:1fr}.hero-visual{order:-1}.hero-visual .art{margin:0 auto}.hero h1{font-size:31px}.hero{margin-bottom:42px}.four{grid-template-columns:repeat(2,minmax(0,1fr))}.workflow h3{min-height:0}.sidebar{padding:28px 18px}.three{gap:9px}.problem-card{padding-left:4px;padding-right:4px}.art{max-width:100%}}
+@media(max-width:740px){.site{display:block}.main-column{border-right:0}.header{padding:16px 20px}.nav{display:none}.mobile-nav{display:block;position:relative}.mobile-nav summary{cursor:pointer;font-size:12px}.mobile-nav nav{position:absolute;right:0;top:30px;z-index:10;background:#101c2c;border:1px solid #3c5b68;padding:12px;border-radius:8px;min-width:140px}.mobile-nav a{display:block;padding:8px;font-size:12px}.main-inner{padding:28px 20px 0}.hero{grid-template-columns:1fr;gap:18px;text-align:center}.hero-visual{order:0}.hero p{margin:auto}.actions{justify-content:center}.hero h1{font-size:32px}.section{margin-bottom:40px}.sidebar{padding:5px 20px 25px}.sidebar h2{font-size:26px}.problem-card h3{font-size:12px}.three{gap:8px}.problem-card .art{width:86px}.problem-card p{font-size:9px}.coins{background-position:-38px -298px}.hourglass{background-position:-171px -298px}.lock{background-position:-301px -298px}.utilities .art{width:88px}.utilities h3{font-size:12px;padding:0 5px}.gas{background-position:-45px -789px}.invoice{background-position:-175px -789px}.api{background-position:-307px -789px}.lanes{grid-template-columns:1fr}.account{padding:0 20px 30px}.account-top{grid-template-columns:1fr}.account-top .hero-visual{display:none}.metrics{grid-template-columns:1fr 1fr}.orders{grid-template-columns:1fr}.stages{display:flex;flex-wrap:wrap;gap:8px 18px;border-left:0;border-top:1px solid #394653;padding:12px 0 0;list-style:none}.stages li:before{content:'○ ';color:#a98aca}.tokenomics{grid-template-columns:1fr 120px 1fr}.donut{width:120px;height:120px}.batch-grid div{font-size:12px}.batch-grid span{font-size:11px}.legend{font-size:11px}.legend b{font-size:13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between">
-
-    <!-- NAVBAR -->
-    <header class="w-full border-b border-purple-900/30 py-4 px-6 md:px-12 flex justify-between items-center bg-[#080b14]/90 backdrop-blur-md sticky top-0 z-50">
-        <div class="flex items-center space-x-3">
-            <div class="w-9 h-9 rounded-full bg-purple-900 flex items-center justify-center border border-purple-500 shadow-md shadow-purple-500/40">
-                <span class="text-purple-300 font-bold">V</span>
-            </div>
-            <span class="font-bold tracking-wider text-xs md:text-sm bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">
-                VOIN TECHNOLOGY PAYMENTS
-            </span>
-        </div>
-        
-        <nav class="hidden lg:flex space-x-6 text-xs text-gray-300">
-            <a href="#hero" class="hover:text-purple-400 transition">Home</a>
-            <a href="#presale" class="hover:text-purple-400 transition">Presale</a>
-            <a href="#payment" class="hover:text-purple-400 transition">Payment Journey</a>
-            <a href="#ecosystem" class="hover:text-purple-400 transition">Ecosystem</a>
-            <a href="#transparency" class="hover:text-purple-400 transition">Transparency</a>
-            <a href="#account" class="hover:text-purple-400 transition">Account</a>
-        </nav>
-
-        <div class="flex items-center space-x-3">
-            <span class="text-[10px] px-2 py-0.5 bg-purple-950 border border-purple-800 rounded text-purple-300">EN</span>
-            <details class="mobile-menu lg:hidden">
-                <summary class="cursor-pointer text-xs text-purple-200">Menu</summary>
-                <nav aria-label="Mobile navigation">
-                    <a href="#hero">Home</a>
-                    <a href="#presale">Presale</a>
-                    <a href="#payment">Payment Journey</a>
-                    <a href="#ecosystem">Ecosystem</a>
-                    <a href="#transparency">Transparency</a>
-                    <a href="#account">Account</a>
-                </nav>
-            </details>
-        </div>
-    </header>
-
-    <!-- MAIN CONTAINER -->
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl space-y-16">
-
-        <!-- 1. HERO / NETWORK JOURNEY SECTION -->
-        <section id="hero" class="text-center pt-6 space-y-6">
-            <p class="text-[10px] uppercase tracking-widest text-purple-400">VOIN NETWORK JOURNEY</p>
-            <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">VOIN Network Journey</h1>
-            <p class="text-xs md:text-sm text-gray-300 max-w-xl mx-auto leading-relaxed">
-                Explore VOIN's network direction, ecosystem plans, and the current limits of this private preview. Use the same wallet account to view your order and allocation status.
-            </p>
-            <!-- Visual Core Vortex -->
-            <div class="flex justify-center py-4">
-                <div class="w-36 h-36 rounded-full bg-gradient-to-tr from-purple-900 via-indigo-900 to-purple-600 p-1 shadow-2xl shadow-purple-500/50 flex items-center justify-center border border-purple-400 relative">
-                    <div class="w-full h-full rounded-full flex items-center justify-center bg-black/50">
-                        <span class="text-4xl font-extrabold text-purple-300">V</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex justify-center gap-3">
-                <a href="#ecosystem" class="px-5 py-2 bg-purple-900/40 border border-purple-600/60 rounded-xl text-xs font-semibold text-purple-200 hover:bg-purple-800/50 transition">Explore the network</a>
-                <a href="#presale" class="px-5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-xl text-xs font-semibold text-white shadow-md shadow-purple-600/30 hover:opacity-90 transition">View presale details</a>
-            </div>
-        </section>
-
-        <!-- 2. PRESALE & TOKENOMICS SECTION -->
-        <section id="presale" class="space-y-6">
-            <div class="text-center">
-                <p class="text-[10px] uppercase tracking-widest text-purple-400 mb-1">CONCEPT PREVIEW: PRESALE AND TOKENOMICS</p>
-                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">Presale, Clearly Structured</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="glow-box rounded-2xl p-5 relative">
-                    <div class="absolute top-4 right-4 text-[10px] bg-purple-900/60 text-purple-300 px-2.5 py-0.5 rounded border border-purple-700/50">Batch 1</div>
-                    <h3 class="text-base font-bold mb-3 text-purple-200">Batch 1</h3>
-                    <div class="space-y-2 text-xs text-gray-300">
-                        <div class="flex justify-between py-1.5 border-b border-purple-900/30">
-                            <span class="text-gray-400">Planned base capacity:</span>
-                            <span class="font-semibold text-white">7.8M VOIN</span>
-                        </div>
-                        <div class="flex justify-between py-1.5">
-                            <span class="text-gray-400">Separate marketing bonus cap:</span>
-                            <span class="font-semibold text-white">7.8M VOIN</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="glow-box rounded-2xl p-5 relative">
-                    <div class="absolute top-4 right-4 text-[10px] bg-purple-900/60 text-purple-300 px-2.5 py-0.5 rounded border border-purple-700/50">REVIEW</div>
-                    <h3 class="text-base font-bold mb-3 text-purple-200">Purchases not yet open</h3>
-                    <p class="text-xs text-gray-300 leading-relaxed">
-                        Purchases are not yet open. No countdown timers or unverified sales figures are displayed.
-                    </p>
-                </div>
-            </div>
-
-            <div class="glow-box rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-purple-900 via-indigo-900 to-purple-600 p-1 shadow-lg shadow-purple-500/30 flex items-center justify-center border border-purple-400">
-                    <div class="w-full h-full rounded-full flex items-center justify-center bg-black/40">
-                        <span class="text-3xl font-extrabold text-purple-300">V</span>
-                    </div>
-                </div>
-                <div class="w-full md:w-2/3 grid grid-cols-2 gap-3 text-xs">
-                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                        <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span><span>Presale:</span></span>
-                        <span class="font-bold">50%</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                        <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block"></span><span>Team:</span></span>
-                        <span class="font-bold">10%</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                        <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 inline-block"></span><span>Reserves:</span></span>
-                        <span class="font-bold">10%</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                        <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-indigo-400 inline-block"></span><span>Listings:</span></span>
-                        <span class="font-bold">11%</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                        <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400 inline-block"></span><span>Rewards:</span></span>
-                        <span class="font-bold">4%</span>
-                    </div>
-                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                        <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block"></span><span>Marketing:</span></span>
-                        <span class="font-bold">15%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="text-center text-[11px] text-gray-400 space-y-0.5">
-                <p class="font-semibold text-gray-300">260M Planned Maximum Supply &bull; 130M Presale Allocation</p>
-                <p class="italic text-gray-500">*Planned allocations, not issued supply. Batches 2-10 are currently unconfigured.</p>
-            </div>
-        </section>
-
-        <!-- 3. PAYMENT JOURNEY SECTION -->
-        <section id="payment" class="space-y-6">
-            <div class="text-center">
-                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">One Clear Payment Journey</h2>
-                <p class="text-xs text-gray-400 mt-1">Pilih jaringan, tinjau detail, dan pantau status order Anda.</p>
-            </div>
-            <ol class="payment-steps" aria-label="Tahapan pembayaran, pratinjau konsep">
-                <li><span>1</span> Pilih jaringan</li>
-                <li><span>2</span> Tinjau detail</li>
-                <li><span>3</span> Otorisasi</li>
-                <li><span>4</span> Lacak status</li>
-            </ol>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="glow-box rounded-2xl p-5 space-y-4">
-                    <h3 class="font-bold text-xs text-purple-200">Pilih Jaringan & Jumlah</h3>
-                    <div class="flex gap-2 text-xs">
-                        <span class="px-3 py-1 bg-purple-900/60 border border-purple-700 rounded-full text-purple-200">Ethereum</span>
-                        <span class="px-3 py-1 bg-purple-950 border border-purple-900 rounded-full text-gray-400">BNB Smart Chain</span>
-                    </div>
-                    <div class="grid grid-cols-2 gap-2 text-xs">
-                        <div class="p-2 border border-purple-500 rounded bg-purple-950/50 text-white font-semibold">ETH</div>
-                        <div class="p-2 border border-purple-900 rounded bg-black/20 text-gray-400">USDT</div>
-                    </div>
-                    <div class="p-3 bg-black/40 rounded border border-purple-900/50 text-[11px] text-gray-500">
-                        Masukkan nominal (Pilihan bergantung konfigurasi jaringan)
-                    </div>
-                </div>
-                <div class="glow-box rounded-2xl p-5 space-y-2 text-xs">
-                    <h3 class="font-bold text-purple-200 mb-2">Ringkasan Order</h3>
-                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Jaringan</span><span class="text-white">Ethereum</span></div>
-                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Aset</span><span class="text-white">ETH</span></div>
-                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Jumlah Pembayaran</span><span class="text-gray-500">Belum tersedia</span></div>
-                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Biaya Jaringan</span><span class="text-gray-500">Belum tersedia</span></div>
-                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Base VOIN</span><span class="text-gray-500">Belum tersedia</span></div>
-                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Total Alokasi</span><span class="text-gray-500">Belum tersedia</span></div>
-                    <div class="pt-2">
-                        <div class="text-[11px] text-yellow-500 mb-2">&#9888; Pembelian belum dibuka</div>
-                        <button disabled class="w-full py-2 bg-gray-800 text-gray-500 rounded-xl text-xs font-semibold cursor-not-allowed">Pembayaran Belum Aktif</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. ECOSYSTEM & ARCHITECTURE SECTION -->
-        <section id="ecosystem" class="space-y-6">
-            <div class="text-center">
-                <p class="text-[10px] uppercase tracking-widest text-purple-400 mb-1">CONNECTED BY DESIGN</p>
-                <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">A Connected Ecosystem</h2>
-                <p class="text-xs text-gray-400 mt-1">Explore VOIN development directions.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                <div class="glow-box rounded-xl p-4 space-y-1">
-                    <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
-                    <h3 class="font-bold text-sm text-white pt-1">Network Foundation</h3>
-                    <p class="text-gray-400 text-[11px]">Core infrastructure development, Scalability research.</p>
-                </div>
-                <div class="glow-box rounded-xl p-4 space-y-1">
-                    <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
-                    <h3 class="font-bold text-sm text-white pt-1">Payment Applications</h3>
-                    <p class="text-gray-400 text-[11px]">Integration tools, Payment gateway exploration.</p>
-                </div>
-                <div class="glow-box rounded-xl p-4 space-y-1">
-                    <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
-                    <h3 class="font-bold text-sm text-white pt-1">Developer Ecosystem</h3>
-                    <p class="text-gray-400 text-[11px]">SDK and API creation, Developer support resources.</p>
-                </div>
-                <div class="glow-box rounded-xl p-4 space-y-1">
-                    <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
-                    <h3 class="font-bold text-sm text-white pt-1">Community & Utility</h3>
-                    <p class="text-gray-400 text-[11px]">Community-driven features, Use case diversification.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. PROJECT DOCUMENTATION & TRANSPARENCY SECTION -->
-        <section id="transparency" class="space-y-4">
-            <div class="text-center">
-                <p class="text-[10px] uppercase tracking-widest text-purple-400 mb-1">PROJECT INFORMATION</p>
-                <h2 class="text-xl font-bold tracking-tight">Project Documentation & Transparency</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div class="glow-box rounded-xl p-5 space-y-2">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded bg-purple-950 border border-purple-800 flex items-center justify-center text-xs">📄</div>
-                        <div>
-                            <h3 class="font-bold text-sm text-white">Whitepaper</h3>
-                            <span class="text-[10px] px-2 py-0.5 bg-red-950/80 text-red-400 border border-red-900 rounded-full">&#9679; Not published</span>
-                        </div>
-                    </div>
-                    <p class="text-[11px] text-gray-400">No verified VOIN whitepaper is available in this preview.</p>
-                </div>
-                <div class="glow-box rounded-xl p-5 space-y-2">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded bg-purple-950 border border-purple-800 flex items-center justify-center text-xs">🛡️</div>
-                        <div>
-                            <h3 class="font-bold text-sm text-white">Security Review</h3>
-                            <span class="text-[10px] px-2 py-0.5 bg-yellow-950/80 text-yellow-400 border border-yellow-900 rounded-full">&#9679; No independent review</span>
-                        </div>
-                    </div>
-                    <p class="text-[11px] text-gray-400">The included checks are internal software tests. They are not an independent audit.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. MY ACCOUNT / DASHBOARD SECTION -->
-        <section id="account" class="voin-dashboard" aria-labelledby="account-heading">
-            <div class="dashboard-heading">
-                <p class="dashboard-eyebrow">CONCEPT PREVIEW · ACCOUNT</p>
-                <h2 id="account-heading">Your VOIN Payment Journey</h2>
-            </div>
-            <div class="dashboard-top">
-                <div class="wallet-panel">
-                    <p class="wallet-title">Sign in to view your account</p>
-                    <button type="button" disabled aria-describedby="wallet-preview" class="wallet-connect">Connect Wallet</button>
-                    <p class="wallet-note">Signing in does not authorize payment.</p>
-                    <p id="wallet-preview" class="wallet-preview">Preview only. Wallet sign-in is not connected yet.</p>
-                </div>
-                <div class="dashboard-emblem" aria-hidden="true">
-                    <svg viewBox="0 0 300 220" focusable="false">
-                        <defs>
-                            <linearGradient id="voin-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9d5ff"/><stop offset=".45" stop-color="#a78bfa"/><stop offset="1" stop-color="#4c1d95"/></linearGradient>
-                            <radialGradient id="voin-halo"><stop stop-color="#7c3aed" stop-opacity=".28"/><stop offset="1" stop-color="#7c3aed" stop-opacity="0"/></radialGradient>
-                        </defs>
-                        <circle cx="150" cy="110" r="100" fill="url(#voin-halo)"/>
-                        <ellipse cx="150" cy="110" rx="110" ry="45" fill="none" stroke="#67e8f9" stroke-opacity=".5" transform="rotate(-25 150 110)"/>
-                        <ellipse cx="150" cy="110" rx="92" ry="63" fill="none" stroke="#a78bfa" stroke-opacity=".6" transform="rotate(28 150 110)"/>
-                        <path d="M91 61 L130 76 L150 119 L173 77 L211 61 L150 174 Z" fill="url(#voin-metal)" stroke="#ddd6fe" stroke-width="2"/>
-                        <path d="M106 76 L150 153 L194 77 L165 91 L150 126 L134 91 Z" fill="#271445" stroke="#c4b5fd" stroke-opacity=".7"/>
-                        <circle cx="242" cy="69" r="4" fill="#67e8f9"/>
-                        <circle cx="59" cy="143" r="3" fill="#c4b5fd"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="dashboard-metrics" aria-label="Account overview">
-                <div class="dashboard-metric"><h3>Verified Base Purchases</h3><p>Not available</p></div>
-                <div class="dashboard-metric"><h3>Marketing Bonus</h3><p>Not available</p></div>
-                <div class="dashboard-metric"><h3>Total Allocation</h3><p>Not available</p></div>
-                <div class="dashboard-metric"><h3>Native Delivery</h3><p>Not available</p></div>
-            </div>
-            <div class="order-panel">
-                <div class="order-empty">
-                    <h3>Order Activity</h3>
-                    <div class="order-empty-message"><p>Your order history will appear after sign-in</p><span>No order data is connected in this preview.</span></div>
-                </div>
-                <div class="order-stages">
-                    <p>Order stages · preview</p>
-                    <ol aria-label="Order stages, no active order">
-                        <li>Order review</li><li>Payment verification</li><li>Allocation</li><li>Delivery</li>
-                    </ol>
-                </div>
-            </div>
-            <p class="dashboard-security">Never share your seed phrase or private key</p>
-        </section>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="w-full text-center py-5 text-[11px] text-gray-500 border-t border-purple-900/30 space-y-0.5">
-        <p>Never share your seed phrase or private key</p>
-        <p>&copy; 2026 VOIN Technology Payments Platform. All rights reserved.</p>
-    </footer>
-
+<body>
+<div class="site">
+<div class="main-column">
+<header class="header"><a class="brand" href="#beranda" aria-label="VOIN Technology Payments"><strong>VOIN</strong><small>TECHNOLOGY<br>PAYMENTS</small></a><nav class="nav" aria-label="Navigasi utama"><a href="#jaringan">Jaringan</a><a href="#utilitas">Utilitas</a><a href="#roadmap">Roadmap</a><a href="#presale">Presale</a><a href="#dokumen">Dokumen</a></nav><details class="mobile-nav"><summary>Menu</summary><nav aria-label="Navigasi ponsel"><a href="#jaringan">Jaringan</a><a href="#utilitas">Utilitas</a><a href="#roadmap">Roadmap</a><a href="#presale">Presale</a><a href="#dokumen">Dokumen</a><a href="#akun">Akun</a></nav></details></header>
+<main class="main-inner" id="beranda">
+<section class="hero" aria-labelledby="hero-title"><div><span class="tag">PERJALANAN JARINGAN VOIN</span><h1 id="hero-title">Membangun Infrastruktur Pembayaran &amp; Settlement Terdesentralisasi</h1><p>Pengembangan blockchain untuk pembayaran lintas negara dan invoice bisnis yang lebih transparan.</p><div class="actions"><a class="pill" href="#jaringan">Jelajahi Jaringan</a><a class="pill purple" href="#presale">Detail Presale</a></div></div><div class="hero-visual"><div class="art" role="img" aria-label="Logo VOIN dengan cincin cahaya ungu dan cyan"></div><p class="visual-note">◉ Dalam Pengembangan</p></div></section>
+<section class="section" id="jaringan"><p class="eyebrow">Masalah &amp; Solusi</p><h2>Mengapa Pembayaran Global Perlu Berevolusi</h2><div class="grid three"><article class="card problem-card"><div class="art coins" aria-hidden="true"></div><h3>Biaya perantara</h3><p>Biaya tambahan dari banyak pihak dapat membebani pembayaran lintas negara.</p></article><article class="card problem-card"><div class="art hourglass" aria-hidden="true"></div><h3>Settlement lambat</h3><p>Proses kliring dan perbedaan jam operasional dapat memperpanjang penyelesaian.</p></article><article class="card problem-card"><div class="art lock" aria-hidden="true"></div><h3>Transparansi terbatas</h3><p>Status dan rincian pemrosesan tidak selalu mudah ditelusuri pengguna.</p></article></div><div class="highlight"><h3>Arah VOIN: lapisan settlement berbasis blockchain</h3><p>Efisiensi dan kecepatan adalah target pengembangan, bukan jaminan layanan saat ini.</p></div></section>
+<section class="section workflow" id="pembayaran"><p class="eyebrow">Alur Pembayaran</p><h2>Alur Pembayaran yang Transparan</h2><div class="grid four"><article class="card"><div class="art network" aria-hidden="true"></div><h3>Pilih Jaringan &amp; Aset</h3><p>Rancangan integrasi<br>Ethereum / BNB Smart Chain<br>ETH / USDT</p></article><article class="card"><div class="art review" aria-hidden="true"></div><h3>Tinjau Biaya</h3><p>Jumlah pembayaran, estimasi biaya, dan alokasi ditinjau sebelum persetujuan.</p></article><article class="card"><div class="art wallet" aria-hidden="true"></div><h3>Otorisasi Wallet</h3><p>Koneksi wallet tidak mengotorisasi pembayaran.</p></article><article class="card"><div class="art tracking" aria-hidden="true"></div><h3>Lacak Status</h3><p>Pemantauan order direncanakan setelah integrasi dan verifikasi tersedia.</p></article></div><p class="flow-note">Setiap pembayaran memerlukan persetujuan transaksi secara eksplisit.</p><div class="grid lanes"><div class="highlight">Presale: verifikasi → alokasi → pengiriman native</div><div class="highlight">Invoice B2B: buat invoice → bayar → konfirmasi</div></div></section>
+<section class="section utilities" id="utilitas"><p class="eyebrow">Utilitas</p><h2>Utilitas Koin VOIN dalam Jaringan</h2><div class="grid three"><article class="card"><div class="art gas" aria-hidden="true"></div><h3>Gas &amp; Biaya Jaringan</h3></article><article class="card"><div class="art invoice" aria-hidden="true"></div><h3>Settlement Invoice</h3></article><article class="card"><div class="art api" aria-hidden="true"></div><h3>SDK &amp; API Pengembang</h3></article></div><div class="center"><span class="tag">Utilitas yang direncanakan</span></div></section>
+</main>
+</div>
+<aside class="sidebar" aria-label="Roadmap, presale, dan dokumentasi">
+<section class="section" id="roadmap"><p class="eyebrow">Roadmap</p><h2>Roadmap &amp; Rencana Penggunaan Dana</h2><div class="timeline"><article class="phase"><h3>Fondasi Jaringan</h3><p>Rencana penggunaan dana Batch 1: infrastruktur inti, arsitektur node, dan riset skalabilitas.</p><div class="funding"><span>◇ Infrastruktur</span><span>▣ Keamanan</span><span>♧ Ekosistem</span></div></article><article class="phase"><h3>Aplikasi Pembayaran</h3><p>Modul invoice, alat integrasi, dan eksplorasi payment gateway.</p></article><article class="phase"><h3>Ekosistem Pengembang</h3><p>SDK, API, dokumentasi, dan dukungan teknis.</p></article><article class="phase"><h3>Komunitas &amp; Utilitas</h3><p>Pengembangan kasus penggunaan dan partisipasi komunitas.</p></article></div><p class="footnote">Tahapan merupakan rencana pengembangan, bukan pernyataan fitur sudah diluncurkan.</p></section>
+<section class="section" id="presale"><p class="eyebrow">Presale</p><h2>Presale yang Terstruktur &amp; Transparan</h2><div class="card batch"><h3>Batch 1</h3><div class="batch-grid"><div><span>Kapasitas dasar</span>7,8 juta VOIN</div><div><span>Batas bonus marketing terpisah</span>7,8 juta VOIN</div><div><span>Suplai maksimum rencana</span>260 juta VOIN</div><div><span>Alokasi presale</span>130 juta VOIN (50%)</div></div></div><div class="card tokenomics"><div class="legend"><div>Presale<b>50%</b></div><div>Tim<b>10%</b></div><div>Cadangan<b>10%</b></div></div><div class="donut" role="img" aria-label="Alokasi rencana: Presale 50 persen, Tim 10 persen, Cadangan 10 persen, Listing 11 persen, Reward 4 persen, Marketing 15 persen"></div><div class="legend"><div>Listing<b>11%</b></div><div>Reward<b>4%</b></div><div>Marketing<b>15%</b></div></div></div><p class="footnote center">Alokasi rencana, bukan suplai beredar. Bonus marketing terpisah dari kapasitas dasar. Batch 2–10 belum dikonfigurasi.</p><div class="presale-status"><h3>Pembelian Belum Dibuka</h3><p>Tanpa countdown, tanpa angka penjualan palsu, tanpa urgensi buatan.</p><button class="disabled" type="button" disabled>Pembayaran Belum Aktif</button><p>Pembukaan menunggu deployment dan pemeriksaan kesiapan.</p></div></section>
+<section class="section" id="dokumen"><p class="eyebrow">Dokumentasi &amp; Keamanan</p><h2>Dokumentasi &amp; Rencana Keamanan</h2><div class="grid docs"><article class="card"><div class="art document" aria-hidden="true"></div><h3>Whitepaper Final</h3><p>Dokumen proyek</p></article><article class="card"><div class="art audit" aria-hidden="true"></div><h3>Audit Independen</h3><p>Belum Terverifikasi</p></article></div><p class="footnote center">Status whitepaper mengikuti penetapan pemilik proyek. Tautan dokumen publik belum disertakan.</p><div class="security"><span>Multisig Treasury</span><span>Timelock</span><span>Keamanan Frontend</span></div><p class="footnote center">Kontrol keamanan yang direncanakan. Bukan sertifikasi keamanan atau bukti audit.</p><div class="center"><a class="dashboard-link" href="#akun" id="open-account">Dashboard Akun</a></div></section>
+<footer class="footer"><p>Jangan bagikan seed phrase atau private key.</p><p>© 2026 VOIN Technology Payments. Seluruh hak dilindungi.</p><p>Pratinjau website · bukan layanan pembayaran aktif</p></footer>
+</aside>
+<section class="account" id="akun" aria-label="Dashboard akun"><details id="account-panel"><summary>Dashboard Akun · Your VOIN Payment Journey</summary><div class="account-content"><div class="account-top"><div class="card signin"><h3>Masuk untuk melihat akun</h3><p>Integrasi akun belum aktif pada pratinjau ini.</p><button type="button" class="disabled" disabled>Connect Wallet</button><p>Masuk tidak mengotorisasi pembayaran.</p></div><div class="hero-visual"><div class="art" aria-hidden="true"></div></div></div><div class="grid metrics"><div class="card"><h3>Pembelian Terverifikasi</h3><p>Belum tersedia</p></div><div class="card"><h3>Bonus Marketing</h3><p>Belum tersedia</p></div><div class="card"><h3>Total Alokasi</h3><p>Belum tersedia</p></div><div class="card"><h3>Pengiriman Native</h3><p>Belum tersedia</p></div></div><div class="card orders"><div><h3>Aktivitas Order</h3><p class="empty">Belum ada data terhubung.<br>Riwayat order tersedia setelah integrasi akun siap.</p></div><ol class="stages"><li>Tinjau order</li><li>Verifikasi</li><li>Alokasi</li><li>Pengiriman</li></ol></div><p class="footnote">Tidak ada transaksi yang dikirim atau wallet yang dihubungkan oleh halaman ini.</p></div></details></section>
+</div>
+<script>
+(function(){
+function openAccount(){if(location.hash==='#akun'){document.getElementById('account-panel').open=true;}}
+window.addEventListener('hashchange',openAccount);openAccount();
+document.getElementById('open-account').addEventListener('click',function(){document.getElementById('account-panel').open=true;});
+document.querySelectorAll('.mobile-nav a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.mobile-nav').open=false;});});
+})();
+</script>
 </body>
 </html>
