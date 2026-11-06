@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VOIN Technology Payments - Presale</title>
+    <title>VOIN Technology Payments - Official Platform</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -22,124 +22,232 @@
 <body class="min-h-screen flex flex-col justify-between">
 
     <!-- NAVBAR -->
-    <header class="w-full border-b border-purple-900/40 py-4 px-6 md:px-12 flex justify-between items-center bg-[#0b0f19]/80 backdrop-blur-md sticky top-0 z-50">
+    <header class="w-full border-b border-purple-900/40 py-4 px-6 md:px-12 flex justify-between items-center bg-[#0b0f19]/90 backdrop-blur-md sticky top-0 z-50">
         <div class="flex items-center space-x-3">
-            <!-- Logo VOIN -->
-            <div class="w-10 h-10 rounded-full bg-purple-900 flex items-center justify-center border border-purple-500 overflow-hidden shadow-lg shadow-purple-500/50">
+            <div class="w-10 h-10 rounded-full bg-purple-900 flex items-center justify-center border border-purple-500 shadow-lg shadow-purple-500/50">
                 <span class="text-purple-300 font-bold text-lg">V</span>
             </div>
-            <span class="font-bold tracking-wider text-lg bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">
+            <span class="font-bold tracking-wider text-sm md:text-lg bg-gradient-to-r from-purple-400 to-indigo-300 bg-clip-text text-transparent">
                 VOIN TECHNOLOGY PAYMENTS
             </span>
         </div>
         
-        <nav class="hidden md:flex space-x-8 text-sm text-gray-300">
-            <a href="#" class="hover:text-purple-400 transition">VOIN Platform</a>
-            <a href="#" class="text-purple-400 font-semibold">Presale</a>
-            <a href="#" class="hover:text-purple-400 transition">Network</a>
-            <a href="#" class="hover:text-purple-400 transition">Account</a>
+        <nav class="hidden lg:flex space-x-6 text-sm text-gray-300">
+            <a href="#home" class="hover:text-purple-400 transition">Home</a>
+            <a href="#presale" class="hover:text-purple-400 transition">Presale</a>
+            <a href="#payment" class="hover:text-purple-400 transition">Payment Journey</a>
+            <a href="#ecosystem" class="hover:text-purple-400 transition">Ecosystem</a>
+            <a href="#transparency" class="hover:text-purple-400 transition">Transparency</a>
+            <a href="#account" class="hover:text-purple-400 transition">My Account</a>
         </nav>
 
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-3">
             <span class="text-xs px-2 py-1 bg-purple-950 border border-purple-800 rounded text-purple-300">EN</span>
-            <button class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-5 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-purple-600/30 transition">
+            <button class="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white px-4 py-2 rounded-xl text-xs md:text-sm font-semibold shadow-lg shadow-purple-600/30 transition">
                 Connect Wallet
             </button>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-grow container mx-auto px-4 py-8 max-w-5xl">
-        
-        <!-- Header Section -->
-        <div class="text-center mb-8">
-            <p class="text-xs uppercase tracking-widest text-purple-400 mb-1">Concept Preview: Presale and Tokenomics</p>
-            <h1 class="text-3xl md:text-4xl font-extrabold tracking-tight">Presale, Clearly Structured</h1>
-        </div>
+    <!-- MAIN CONTAINER -->
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl space-y-20">
 
-        <!-- Dashboard Presale Cards (2 Kolom) -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-            
-            <!-- Kotak Kiri: Batch 1 -->
-            <div class="glow-box rounded-2xl p-6 relative">
-                <div class="absolute top-4 right-4 text-xs bg-purple-900/60 text-purple-300 px-3 py-1 rounded-full border border-purple-700/50">Batch 1</div>
-                <h3 class="text-lg font-bold mb-4 text-purple-200">Batch 1</h3>
-                <div class="space-y-3 text-sm text-gray-300">
-                    <div class="flex justify-between py-2 border-b border-purple-900/40">
-                        <span class="text-gray-400">Planned base capacity:</span>
-                        <span class="font-semibold text-white">7.8M VOIN</span>
+        <!-- 1. HOME / HERO SECTION -->
+        <section id="home" class="text-center pt-8">
+            <p class="text-xs uppercase tracking-widest text-purple-400 mb-2">VOIN Network Journey</p>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4">VOIN Network Journey</h1>
+            <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base mb-8">
+                Explore VOIN's network direction, ecosystem plans, and the current limits of this private preview. Use the same wallet account to view your order and allocation status.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#ecosystem" class="bg-purple-900/60 border border-purple-600 text-purple-200 px-6 py-2.5 rounded-xl text-sm font-semibold hover:bg-purple-800 transition">Explore the network</a>
+                <a href="#presale" class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-lg shadow-purple-600/30 hover:opacity-90 transition">View presale details</a>
+            </div>
+        </section>
+
+        <!-- 2. PRESALE & TOKENOMICS -->
+        <section id="presale" class="space-y-6">
+            <div class="text-center">
+                <p class="text-xs uppercase tracking-widest text-purple-400 mb-1">Concept Preview: Presale and Tokenomics</p>
+                <h2 class="text-3xl font-extrabold tracking-tight">Presale, Clearly Structured</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Batch 1 Card -->
+                <div class="glow-box rounded-2xl p-6 relative">
+                    <div class="absolute top-4 right-4 text-xs bg-purple-900/60 text-purple-300 px-3 py-1 rounded-full border border-purple-700/50">Batch 1</div>
+                    <h3 class="text-lg font-bold mb-4 text-purple-200">Batch 1</h3>
+                    <div class="space-y-3 text-sm text-gray-300">
+                        <div class="flex justify-between py-2 border-b border-purple-900/40">
+                            <span class="text-gray-400">Planned base capacity:</span>
+                            <span class="font-semibold text-white">7.8M VOIN</span>
+                        </div>
+                        <div class="flex justify-between py-2">
+                            <span class="text-gray-400">Separate marketing bonus cap:</span>
+                            <span class="font-semibold text-white">7.8M VOIN</span>
+                        </div>
                     </div>
-                    <div class="flex justify-between py-2">
-                        <span class="text-gray-400">Separate marketing bonus cap:</span>
-                        <span class="font-semibold text-white">7.8M VOIN</span>
-                    </div>
+                </div>
+
+                <!-- Review Card -->
+                <div class="glow-box rounded-2xl p-6 relative">
+                    <div class="absolute top-4 right-4 text-xs bg-purple-900/60 text-purple-300 px-3 py-1 rounded-full border border-purple-700/50">REVIEW</div>
+                    <h3 class="text-lg font-bold mb-4 text-purple-200">Purchases not yet open</h3>
+                    <p class="text-sm text-gray-300 leading-relaxed">
+                        Your status's not yet open. No countdown timers or fake "sold amount" indicators[span_5](start_span)[span_5](end_span).
+                    </p>
                 </div>
             </div>
 
-            <!-- Kotak Kanan: Review -->
-            <div class="glow-box rounded-2xl p-6 relative">
-                <div class="absolute top-4 right-4 text-xs bg-purple-900/60 text-purple-300 px-3 py-1 rounded-full border border-purple-700/50">REVIEW</div>
-                <h3 class="text-lg font-bold mb-4 text-purple-200">Purchases not yet open</h3>
-                <p class="text-sm text-gray-300 leading-relaxed">
-                    Your status's not yet open. No countdown timers or fake "sold amount" indicators.
-                </p>
-            </div>
-
-        </div>
-
-        <!-- Tokenomics Section -->
-        <div class="glow-box rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8">
-            
-            <!-- Visual Ikon Koin / Representasi -->
-            <div class="flex flex-col items-center justify-center">
+            <!-- Tokenomics Breakdown -->
+            <div class="glow-box rounded-2xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-8">
                 <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-purple-900 via-indigo-900 to-purple-600 p-1 shadow-2xl shadow-purple-500/40 flex items-center justify-center border-2 border-purple-400">
                     <div class="w-full h-full rounded-full flex items-center justify-center bg-black/40">
                         <span class="text-4xl font-extrabold text-purple-300">V</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Rincian Persentase Alokasi -->
-            <div class="w-full md:w-2/3 grid grid-cols-2 gap-4 text-sm">
-                <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                    <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span><span>Presale:</span></span>
-                    <span class="font-bold">50%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                    <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-purple-400 inline-block"></span><span>Team:</span></span>
-                    <span class="font-bold">10%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                    <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-gray-400 inline-block"></span><span>Reserves:</span></span>
-                    <span class="font-bold">10%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                    <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-indigo-400 inline-block"></span><span>Listings:</span></span>
-                    <span class="font-bold">11%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                    <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-pink-400 inline-block"></span><span>Rewards:</span></span>
-                    <span class="font-bold">4%</span>
-                </div>
-                <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
-                    <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-violet-500 inline-block"></span><span>Marketing:</span></span>
-                    <span class="font-bold">15%</span>
+                <div class="w-full md:w-2/3 grid grid-cols-2 gap-4 text-sm">
+                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
+                        <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-cyan-400 inline-block"></span><span>Presale:</span></span>
+                        <span class="font-bold">50%</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
+                        <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-purple-400 inline-block"></span><span>Team:</span></span>
+                        <span class="font-bold">10%</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
+                        <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-gray-400 inline-block"></span><span>Reserves:</span></span>
+                        <span class="font-bold">10%</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
+                        <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-indigo-400 inline-block"></span><span>Listings:</span></span>
+                        <span class="font-bold">11%</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
+                        <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-pink-400 inline-block"></span><span>Rewards:</span></span>
+                        <span class="font-bold">4%</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
+                        <span class="flex items-center space-x-2"><span class="w-3 h-3 rounded-full bg-violet-500 inline-block"></span><span>Marketing:</span></span>
+                        <span class="font-bold">15%</span>
+                    </div>
                 </div>
             </div>
+            <div class="text-center text-xs text-gray-400">
+                <p class="font-semibold text-gray-300">260M Planned Maximum Supply &bull; 130M Presale Allocation[span_6](start_span)[span_6](end_span)</p>
+                <p class="italic">*Planned allocations, not issued supply. Batches 2-10 are currently unconfigured[span_7](start_span)[span_7](end_span).</p>
+            </div>
+        </section>
 
-        </div>
+        <!-- 3. PAYMENT JOURNEY -->
+        <section id="payment" class="space-y-6">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight">One Clear Payment Journey</h2>
+                <p class="text-sm text-gray-400 mt-1">Pilih jaringan, tinjau detail, dan pantau status order Anda.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Select Network & Asset -->
+                <div class="glow-box rounded-2xl p-6 space-y-4">
+                    <h3 class="font-bold text-purple-200">Pilih Jaringan & Jumlah</h3>
+                    <div class="flex gap-2 text-xs">
+                        <span class="px-3 py-1 bg-purple-900/50 border border-purple-700 rounded-full text-purple-200">Ethereum</span>
+                        <span class="px-3 py-1 bg-purple-950 border border-purple-900 rounded-full text-gray-400">BNB Smart Chain</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <div class="p-2 border border-purple-500 rounded bg-purple-950/50 text-white">ETH</div>
+                        <div class="p-2 border border-purple-900 rounded bg-black/20 text-gray-400">USDT</div>
+                    </div>
+                    <div class="p-3 bg-black/40 rounded border border-purple-900/50 text-xs text-gray-500">
+                        Masukkan nominal (Pilihan bergantung konfigurasi jaringan)
+                    </div>
+                </div>
+                <!-- Order Summary -->
+                <div class="glow-box rounded-2xl p-6 space-y-3 text-sm">
+                    <h3 class="font-bold text-purple-200 mb-2">Ringkasan Order</h3>
+                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Jaringan</span><span class="text-white">Ethereum</span></div>
+                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Aset</span><span class="text-white">ETH</span></div>
+                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Jumlah Pembayaran</span><span class="text-gray-500">Belum tersedia</span></div>
+                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Biaya Jaringan</span><span class="text-gray-500">Belum tersedia</span></div>
+                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Base VOIN</span><span class="text-gray-500">Belum tersedia</span></div>
+                    <div class="flex justify-between py-1 border-b border-purple-900/30 text-gray-400"><span>Total Alokasi</span><span class="text-gray-500">Belum tersedia</span></div>
+                    <div class="pt-2">
+                        <div class="text-xs text-yellow-500 mb-2">&#9888; Pembelian belum dibuka</div>
+                        <button disabled class="w-full py-2 bg-gray-800 text-gray-500 rounded-xl text-xs font-semibold cursor-not-allowed">Pembayaran Belum Aktif</button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Footer / Keterangan Suplai -->
-        <div class="text-center mt-6 space-y-1 text-xs text-gray-400">
-            <p class="font-semibold text-gray-300">260M Planned Maximum Supply &bull; 130M Presale Allocation</p>
-            <p class="italic">*Planned allocations, not issued supply. Batches 2-10 are currently unconfigured.</p>
-        </div>
+        <!-- 4. PROJECT DOCUMENTATION & TRANSPARENCY -->
+        <section id="transparency" class="space-y-6">
+            <div class="text-center">
+                <p class="text-xs uppercase tracking-widest text-purple-400 mb-1">PROJECT INFORMATION</p>
+                <h2 class="text-3xl font-extrabold tracking-tight">Project Documentation & Transparency</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Whitepaper Box -->
+                <div class="glow-box rounded-2xl p-6 space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded bg-purple-950 border border-purple-800 flex items-center justify-center text-purple-300 font-bold">📄</div>
+                        <div>
+                            <h3 class="font-bold text-white">Whitepaper</h3>
+                            <span class="text-xs px-2 py-0.5 bg-red-950 text-red-400 border border-red-800 rounded-full">&#9679; Not published</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400">No verified VOIN whitepaper is available in this preview.</p>
+                </div>
+                <!-- Security Review Box -->
+                <div class="glow-box rounded-2xl p-6 space-y-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded bg-purple-950 border border-purple-800 flex items-center justify-center text-purple-300 font-bold">🛡️</div>
+                        <div>
+                            <h3 class="font-bold text-white">Security Review</h3>
+                            <span class="text-xs px-2 py-0.5 bg-yellow-950 text-yellow-400 border border-yellow-800 rounded-full">&#9679; No independent security review report is provided here.</span>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400">The included checks are internal software tests. They are not an independent audit or certification.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MY ACCOUNT / DASHBOARD -->
+        <section id="account" class="space-y-6">
+            <div class="text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight">Your VOIN Payment Journey</h2>
+            </div>
+            <div class="glow-box rounded-2xl p-6 md:p-8 space-y-6">
+                <div class="text-center space-y-3">
+                    <p class="text-sm text-gray-300">Sign in to view your account</p>
+                    <button class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-6 py-2 rounded-xl text-sm font-semibold shadow-lg">Connect Wallet</button>
+                    <p class="text-xs text-gray-500">Signing in does not authorize payment.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <div class="p-4 bg-black/30 border border-purple-900/40 rounded-xl">
+                        <span class="text-xs text-gray-400 block">Verified Base Purchases</span>
+                        <span class="font-bold text-sm text-gray-300">Not available</span>
+                    </div>
+                    <div class="p-4 bg-black/30 border border-purple-900/40 rounded-xl">
+                        <span class="text-xs text-gray-400 block">Marketing Bonus</span>
+                        <span class="font-bold text-sm text-gray-300">Not available</span>
+                    </div>
+                    <div class="p-4 bg-black/30 border border-purple-900/40 rounded-xl">
+                        <span class="text-xs text-gray-400 block">Total Allocation</span>
+                        <span class="font-bold text-sm text-gray-300">Not available</span>
+                    </div>
+                    <div class="p-4 bg-black/30 border border-purple-900/40 rounded-xl">
+                        <span class="text-xs text-gray-400 block">Native Delivery</span>
+                        <span class="font-bold text-sm text-gray-300">Not available</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="w-full text-center py-6 text-xs text-gray-500 border-t border-purple-900/30">
-        &copy; 2026 VOIN Technology Payments. All rights reserved.
+    <footer class="w-full text-center py-6 text-xs text-gray-500 border-t border-purple-900/30 mt-12 space-y-1">
+        <p>Never share your seed phrase or private key</p>
+        <p>&copy; 2026 VOIN Technology Payments Platform. All rights reserved.</p>
     </footer>
 
 </body>
