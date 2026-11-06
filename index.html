@@ -17,6 +17,78 @@
             border: 1px solid rgba(139, 92, 246, 0.25);
             box-shadow: 0 0 25px rgba(139, 92, 246, 0.12);
         }
+        /* Visual polish only: existing section order and payment state retained. */
+        html { scroll-padding-top: 7rem; }
+        body {
+            background-image: radial-gradient(ellipse at 12% 5%, rgba(34, 211, 238, .045), transparent 38%), radial-gradient(ellipse at 90% 30%, rgba(139, 92, 246, .075), transparent 45%);
+            line-height: 1.6;
+        }
+        .glow-box {
+            border-color: rgba(167, 139, 250, .28);
+            box-shadow: 0 0 24px rgba(139, 92, 246, .08), inset 0 1px 0 rgba(255, 255, 255, .035);
+        }
+        .glow-box p { overflow-wrap: anywhere; }
+        a:focus-visible, button:focus-visible, summary:focus-visible {
+            outline: 2px solid #67e8f9;
+            outline-offset: 4px;
+        }
+        #presale .space-y-2 > .flex { gap: 1rem; align-items: baseline; }
+        #presale .space-y-2 > .flex > span:last-child { flex-shrink: 0; text-align: right; }
+        #transparency .glow-box { border-top-color: rgba(103, 232, 249, .35); }
+        #transparency .glow-box:last-child { border-top-color: rgba(167, 139, 250, .5); }
+        .payment-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: .6rem 1.4rem; color: #9ca3af; font-size: .75rem; }
+        .payment-steps li { display: flex; align-items: center; gap: .4rem; }
+        .payment-steps span { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border: 1px solid rgba(167, 139, 250, .4); border-radius: 50%; color: #c4b5fd; }
+        .mobile-menu { position: relative; }
+        .mobile-menu nav { position: absolute; right: 0; top: 2.3rem; min-width: 12rem; padding: .75rem; background: #101323; border: 1px solid #4c3576; border-radius: .75rem; box-shadow: 0 12px 32px #0008; }
+        .mobile-menu nav a { display: block; padding: .5rem .75rem; color: #e5e7eb; font-size: .8rem; }
+        @media (max-width: 639px) {
+            header { padding-left: 1rem !important; padding-right: 1rem !important; gap: .75rem; }
+            header > div:first-child { gap: .5rem; }
+            header > div:first-child > span { max-width: 10rem; font-size: .65rem; }
+            main { padding-top: 1.5rem !important; }
+            #hero > .flex:last-child { flex-wrap: wrap; }
+            #presale .grid.grid-cols-2 > .flex { flex-wrap: wrap; gap: .35rem; }
+        }
+        @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto !important; } }
+        /* Account layout follows the supplied VOIN dashboard reference. */
+        .voin-dashboard { padding: 2rem; border: 1px solid rgba(103,232,249,.4); border-radius: 1rem; background: linear-gradient(135deg,rgba(9,19,31,.97),rgba(18,16,36,.94)); box-shadow: 0 0 35px rgba(103,232,249,.04); }
+        .dashboard-heading { margin-bottom: 1.5rem; }
+        .dashboard-eyebrow { font-size: .62rem; color: #a5a8bd; letter-spacing: .16em; margin-bottom: .5rem; }
+        .dashboard-heading h2 { font-size: clamp(1.3rem,3vw,1.8rem); font-weight: 600; }
+        .dashboard-top { display: grid; grid-template-columns: 1.1fr 1fr; align-items: center; gap: 1.5rem; }
+        .wallet-panel,.dashboard-metric,.order-panel { background: linear-gradient(125deg,rgba(255,255,255,.065),rgba(139,92,246,.045)); border: 1px solid rgba(185,193,219,.34); border-radius: .65rem; box-shadow: inset 0 1px 0 rgba(255,255,255,.04); }
+        .wallet-panel { padding: 1.7rem 1rem; text-align: center; border-top-color: rgba(103,232,249,.7); }
+        .wallet-title { font-size: .95rem; color: #e5e7eb; }
+        .wallet-connect { display: inline-block; margin: 1rem 0 .65rem; padding: .55rem 1.1rem; border-radius: .4rem; background: linear-gradient(110deg,#67e8f9,#a78bfa); color: #101323; font-size: .8rem; font-weight: 600; cursor: not-allowed; }
+        .wallet-note { font-size: .68rem; color: #bcc0cf; }
+        .wallet-preview { margin-top: .5rem; font-size: .65rem; color: #a5a8bd; }
+        .dashboard-emblem { display: flex; justify-content: center; }
+        .dashboard-emblem svg { width: min(100%,300px); height: auto; }
+        .dashboard-metrics { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: .8rem; margin: 1rem 0; }
+        .dashboard-metric { padding: .95rem .8rem; }
+        .dashboard-metric h3 { font-size: .67rem; color: #b7bdce; min-height: 2.1em; }
+        .dashboard-metric p { font-size: 1rem; margin-top: .35rem; color: #e5e7eb; }
+        .order-panel { display: grid; grid-template-columns: minmax(0,1fr) 12rem; min-height: 14rem; padding: 1rem; gap: 1rem; }
+        .order-empty { display: flex; flex-direction: column; }
+        .order-empty h3 { font-size: .9rem; }
+        .order-empty-message { flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; text-align: center; padding: 1.5rem .5rem; font-size: .8rem; color: #d1d5db; }
+        .order-empty-message span { color: #9ca3af; font-size: .65rem; margin-top: .5rem; }
+        .order-stages { border-left: 1px solid rgba(185,193,219,.2); padding-left: 1.4rem; }
+        .order-stages > p { font-size: .63rem; color: #9ca3af; margin-bottom: .9rem; }
+        .order-stages ol { border-left: 1px solid #4b5067; margin-left: .3rem; }
+        .order-stages li { position: relative; padding: 0 0 1.15rem 1rem; color: #a5a8bd; font-size: .73rem; }
+        .order-stages li:last-child { padding-bottom: 0; }
+        .order-stages li::before { content: ''; position: absolute; left: -.35rem; top: .28rem; width: .65rem; height: .65rem; background: #24283d; border: 1px solid #697087; border-radius: 50%; }
+        .dashboard-security { text-align: center; font-size: .68rem; color: #a5a8bd; margin-top: 1.2rem; }
+        @media(max-width:639px) {
+            .voin-dashboard { padding: 1.15rem; }
+            .dashboard-top { grid-template-columns: 1fr; gap: .25rem; }
+            .dashboard-emblem svg { max-width: 210px; }
+            .dashboard-metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+            .order-panel { grid-template-columns: 1fr; }
+            .order-stages { border-left: 0; border-top: 1px solid rgba(185,193,219,.2); padding: 1rem .5rem .5rem; }
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between">
@@ -43,6 +115,17 @@
 
         <div class="flex items-center space-x-3">
             <span class="text-[10px] px-2 py-0.5 bg-purple-950 border border-purple-800 rounded text-purple-300">EN</span>
+            <details class="mobile-menu lg:hidden">
+                <summary class="cursor-pointer text-xs text-purple-200">Menu</summary>
+                <nav aria-label="Mobile navigation">
+                    <a href="#hero">Home</a>
+                    <a href="#presale">Presale</a>
+                    <a href="#payment">Payment Journey</a>
+                    <a href="#ecosystem">Ecosystem</a>
+                    <a href="#transparency">Transparency</a>
+                    <a href="#account">Account</a>
+                </nav>
+            </details>
         </div>
     </header>
 
@@ -54,7 +137,7 @@
             <p class="text-[10px] uppercase tracking-widest text-purple-400">VOIN NETWORK JOURNEY</p>
             <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight">VOIN Network Journey</h1>
             <p class="text-xs md:text-sm text-gray-300 max-w-xl mx-auto leading-relaxed">
-                Explore VOIN's network direction, ecosystem plans, and the current limits of this private preview. Use the same wallet account to view your order and allocation status[span_4](start_span)[span_4](end_span).
+                Explore VOIN's network direction, ecosystem plans, and the current limits of this private preview. Use the same wallet account to view your order and allocation status.
             </p>
             <!-- Visual Core Vortex -->
             <div class="flex justify-center py-4">
@@ -84,11 +167,11 @@
                     <div class="space-y-2 text-xs text-gray-300">
                         <div class="flex justify-between py-1.5 border-b border-purple-900/30">
                             <span class="text-gray-400">Planned base capacity:</span>
-                            <span class="font-semibold text-white">7.8M VOIN</span>[span_5](start_span)[span_5](end_span)
+                            <span class="font-semibold text-white">7.8M VOIN</span>
                         </div>
                         <div class="flex justify-between py-1.5">
                             <span class="text-gray-400">Separate marketing bonus cap:</span>
-                            <span class="font-semibold text-white">7.8M VOIN</span>[span_6](start_span)[span_6](end_span)
+                            <span class="font-semibold text-white">7.8M VOIN</span>
                         </div>
                     </div>
                 </div>
@@ -97,7 +180,7 @@
                     <div class="absolute top-4 right-4 text-[10px] bg-purple-900/60 text-purple-300 px-2.5 py-0.5 rounded border border-purple-700/50">REVIEW</div>
                     <h3 class="text-base font-bold mb-3 text-purple-200">Purchases not yet open</h3>
                     <p class="text-xs text-gray-300 leading-relaxed">
-                        Your status's not yet open. No countdown timers or fake "sold amount" indicators[span_7](start_span)[span_7](end_span).
+                        Purchases are not yet open. No countdown timers or unverified sales figures are displayed.
                     </p>
                 </div>
             </div>
@@ -111,33 +194,33 @@
                 <div class="w-full md:w-2/3 grid grid-cols-2 gap-3 text-xs">
                     <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
                         <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span><span>Presale:</span></span>
-                        <span class="font-bold">50%</span>[span_8](start_span)[span_8](end_span)
+                        <span class="font-bold">50%</span>
                     </div>
                     <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
                         <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-purple-400 inline-block"></span><span>Team:</span></span>
-                        <span class="font-bold">10%</span>[span_9](start_span)[span_9](end_span)
+                        <span class="font-bold">10%</span>
                     </div>
                     <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
                         <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-gray-400 inline-block"></span><span>Reserves:</span></span>
-                        <span class="font-bold">10%</span>[span_10](start_span)[span_10](end_span)
+                        <span class="font-bold">10%</span>
                     </div>
                     <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
                         <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-indigo-400 inline-block"></span><span>Listings:</span></span>
-                        <span class="font-bold">11%</span>[span_11](start_span)[span_11](end_span)
+                        <span class="font-bold">11%</span>
                     </div>
                     <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
                         <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-pink-400 inline-block"></span><span>Rewards:</span></span>
-                        <span class="font-bold">4%</span>[span_12](start_span)[span_12](end_span)
+                        <span class="font-bold">4%</span>
                     </div>
                     <div class="flex items-center justify-between p-2 rounded bg-purple-950/30 border border-purple-900/30">
                         <span class="flex items-center space-x-2"><span class="w-2.5 h-2.5 rounded-full bg-violet-500 inline-block"></span><span>Marketing:</span></span>
-                        <span class="font-bold">15%</span>[span_13](start_span)[span_13](end_span)
+                        <span class="font-bold">15%</span>
                     </div>
                 </div>
             </div>
             <div class="text-center text-[11px] text-gray-400 space-y-0.5">
-                <p class="font-semibold text-gray-300">260M Planned Maximum Supply &bull; 130M Presale Allocation[span_14](start_span)[span_14](end_span)</p>
-                <p class="italic text-gray-500">*Planned allocations, not issued supply. Batches 2-10 are currently unconfigured.[span_15](start_span)[span_15](end_span)</p>
+                <p class="font-semibold text-gray-300">260M Planned Maximum Supply &bull; 130M Presale Allocation</p>
+                <p class="italic text-gray-500">*Planned allocations, not issued supply. Batches 2-10 are currently unconfigured.</p>
             </div>
         </section>
 
@@ -147,6 +230,12 @@
                 <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">One Clear Payment Journey</h2>
                 <p class="text-xs text-gray-400 mt-1">Pilih jaringan, tinjau detail, dan pantau status order Anda.</p>
             </div>
+            <ol class="payment-steps" aria-label="Tahapan pembayaran, pratinjau konsep">
+                <li><span>1</span> Pilih jaringan</li>
+                <li><span>2</span> Tinjau detail</li>
+                <li><span>3</span> Otorisasi</li>
+                <li><span>4</span> Lacak status</li>
+            </ol>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div class="glow-box rounded-2xl p-5 space-y-4">
                     <h3 class="font-bold text-xs text-purple-200">Pilih Jaringan & Jumlah</h3>
@@ -183,28 +272,28 @@
             <div class="text-center">
                 <p class="text-[10px] uppercase tracking-widest text-purple-400 mb-1">CONNECTED BY DESIGN</p>
                 <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">A Connected Ecosystem</h2>
-                <p class="text-xs text-gray-400 mt-1">Explore VOIN development directions[span_16](start_span)[span_16](end_span).</p>
+                <p class="text-xs text-gray-400 mt-1">Explore VOIN development directions.</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
                 <div class="glow-box rounded-xl p-4 space-y-1">
                     <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
                     <h3 class="font-bold text-sm text-white pt-1">Network Foundation</h3>
-                    <p class="text-gray-400 text-[11px]">Core infrastructure development, Scalability research[span_17](start_span)[span_17](end_span).</p>
+                    <p class="text-gray-400 text-[11px]">Core infrastructure development, Scalability research.</p>
                 </div>
                 <div class="glow-box rounded-xl p-4 space-y-1">
                     <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
                     <h3 class="font-bold text-sm text-white pt-1">Payment Applications</h3>
-                    <p class="text-gray-400 text-[11px]">Integration tools, Payment gateway exploration[span_18](start_span)[span_18](end_span).</p>
+                    <p class="text-gray-400 text-[11px]">Integration tools, Payment gateway exploration.</p>
                 </div>
                 <div class="glow-box rounded-xl p-4 space-y-1">
                     <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
                     <h3 class="font-bold text-sm text-white pt-1">Developer Ecosystem</h3>
-                    <p class="text-gray-400 text-[11px]">SDK and API creation, Developer support resources[span_19](start_span)[span_19](end_span).</p>
+                    <p class="text-gray-400 text-[11px]">SDK and API creation, Developer support resources.</p>
                 </div>
                 <div class="glow-box rounded-xl p-4 space-y-1">
                     <span class="text-[9px] uppercase px-2 py-0.5 bg-purple-950 text-purple-300 rounded border border-purple-800">Roadmap</span>
                     <h3 class="font-bold text-sm text-white pt-1">Community & Utility</h3>
-                    <p class="text-gray-400 text-[11px]">Community-driven features, Use case diversification[span_20](start_span)[span_20](end_span).</p>
+                    <p class="text-gray-400 text-[11px]">Community-driven features, Use case diversification.</p>
                 </div>
             </div>
         </section>
@@ -221,61 +310,79 @@
                         <div class="w-8 h-8 rounded bg-purple-950 border border-purple-800 flex items-center justify-center text-xs">📄</div>
                         <div>
                             <h3 class="font-bold text-sm text-white">Whitepaper</h3>
-                            <span class="text-[10px] px-2 py-0.5 bg-red-950/80 text-red-400 border border-red-900 rounded-full">&#9679; Not published</span>[span_21](start_span)[span_21](end_span)
+                            <span class="text-[10px] px-2 py-0.5 bg-red-950/80 text-red-400 border border-red-900 rounded-full">&#9679; Not published</span>
                         </div>
                     </div>
-                    <p class="text-[11px] text-gray-400">No verified VOIN whitepaper is available in this preview[span_22](start_span)[span_22](end_span).</p>
+                    <p class="text-[11px] text-gray-400">No verified VOIN whitepaper is available in this preview.</p>
                 </div>
                 <div class="glow-box rounded-xl p-5 space-y-2">
                     <div class="flex items-center space-x-3">
                         <div class="w-8 h-8 rounded bg-purple-950 border border-purple-800 flex items-center justify-center text-xs">🛡️</div>
                         <div>
                             <h3 class="font-bold text-sm text-white">Security Review</h3>
-                            <span class="text-[10px] px-2 py-0.5 bg-yellow-950/80 text-yellow-400 border border-yellow-900 rounded-full">&#9679; No independent review</span>[span_23](start_span)[span_23](end_span)
+                            <span class="text-[10px] px-2 py-0.5 bg-yellow-950/80 text-yellow-400 border border-yellow-900 rounded-full">&#9679; No independent review</span>
                         </div>
                     </div>
-                    <p class="text-[11px] text-gray-400">The included checks are internal software tests. They are not an independent audit[span_24](start_span)[span_24](end_span).</p>
+                    <p class="text-[11px] text-gray-400">The included checks are internal software tests. They are not an independent audit.</p>
                 </div>
             </div>
         </section>
 
         <!-- 6. MY ACCOUNT / DASHBOARD SECTION -->
-        <section id="account" class="space-y-4">
-            <div class="text-center">
-                <h2 class="text-xl font-bold tracking-tight">Your VOIN Payment Journey</h2>
+        <section id="account" class="voin-dashboard" aria-labelledby="account-heading">
+            <div class="dashboard-heading">
+                <p class="dashboard-eyebrow">CONCEPT PREVIEW · ACCOUNT</p>
+                <h2 id="account-heading">Your VOIN Payment Journey</h2>
             </div>
-            <div class="glow-box rounded-2xl p-6 space-y-6">
-                <div class="text-center space-y-2">
-                    <p class="text-xs text-gray-300">Sign in to view your account[span_25](start_span)[span_25](end_span)</p>
-                    <button class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-5 py-2 rounded-xl text-xs font-semibold shadow-md">Connect Wallet</button>[span_26](start_span)[span_26](end_span)
-                    <p class="text-[10px] text-gray-500">Signing in does not authorize payment[span_27](start_span)[span_27](end_span).</p>
+            <div class="dashboard-top">
+                <div class="wallet-panel">
+                    <p class="wallet-title">Sign in to view your account</p>
+                    <button type="button" disabled aria-describedby="wallet-preview" class="wallet-connect">Connect Wallet</button>
+                    <p class="wallet-note">Signing in does not authorize payment.</p>
+                    <p id="wallet-preview" class="wallet-preview">Preview only. Wallet sign-in is not connected yet.</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center text-xs">
-                    <div class="p-3 bg-black/30 border border-purple-900/40 rounded-xl">
-                        <span class="text-[10px] text-gray-400 block">Verified Base Purchases</span>[span_28](start_span)[span_28](end_span)
-                        <span class="font-bold text-gray-400 text-xs">Not available</span>[span_29](start_span)[span_29](end_span)
-                    </div>
-                    <div class="p-3 bg-black/30 border border-purple-900/40 rounded-xl">
-                        <span class="text-[10px] text-gray-400 block">Marketing Bonus</span>[span_30](start_span)[span_30](end_span)
-                        <span class="font-bold text-gray-400 text-xs">Not available</span>[span_31](start_span)[span_31](end_span)
-                    </div>
-                    <div class="p-3 bg-black/30 border border-purple-900/40 rounded-xl">
-                        <span class="text-[10px] text-gray-400 block">Total Allocation</span>[span_32](start_span)[span_32](end_span)
-                        <span class="font-bold text-gray-400 text-xs">Not available</span>[span_33](start_span)[span_33](end_span)
-                    </div>
-                    <div class="p-3 bg-black/30 border border-purple-900/40 rounded-xl">
-                        <span class="text-[10px] text-gray-400 block">Native Delivery</span>[span_34](start_span)[span_34](end_span)
-                        <span class="font-bold text-gray-400 text-xs">Not available</span>[span_35](start_span)[span_35](end_span)
-                    </div>
+                <div class="dashboard-emblem" aria-hidden="true">
+                    <svg viewBox="0 0 300 220" focusable="false">
+                        <defs>
+                            <linearGradient id="voin-metal" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e9d5ff"/><stop offset=".45" stop-color="#a78bfa"/><stop offset="1" stop-color="#4c1d95"/></linearGradient>
+                            <radialGradient id="voin-halo"><stop stop-color="#7c3aed" stop-opacity=".28"/><stop offset="1" stop-color="#7c3aed" stop-opacity="0"/></radialGradient>
+                        </defs>
+                        <circle cx="150" cy="110" r="100" fill="url(#voin-halo)"/>
+                        <ellipse cx="150" cy="110" rx="110" ry="45" fill="none" stroke="#67e8f9" stroke-opacity=".5" transform="rotate(-25 150 110)"/>
+                        <ellipse cx="150" cy="110" rx="92" ry="63" fill="none" stroke="#a78bfa" stroke-opacity=".6" transform="rotate(28 150 110)"/>
+                        <path d="M91 61 L130 76 L150 119 L173 77 L211 61 L150 174 Z" fill="url(#voin-metal)" stroke="#ddd6fe" stroke-width="2"/>
+                        <path d="M106 76 L150 153 L194 77 L165 91 L150 126 L134 91 Z" fill="#271445" stroke="#c4b5fd" stroke-opacity=".7"/>
+                        <circle cx="242" cy="69" r="4" fill="#67e8f9"/>
+                        <circle cx="59" cy="143" r="3" fill="#c4b5fd"/>
+                    </svg>
                 </div>
             </div>
+            <div class="dashboard-metrics" aria-label="Account overview">
+                <div class="dashboard-metric"><h3>Verified Base Purchases</h3><p>Not available</p></div>
+                <div class="dashboard-metric"><h3>Marketing Bonus</h3><p>Not available</p></div>
+                <div class="dashboard-metric"><h3>Total Allocation</h3><p>Not available</p></div>
+                <div class="dashboard-metric"><h3>Native Delivery</h3><p>Not available</p></div>
+            </div>
+            <div class="order-panel">
+                <div class="order-empty">
+                    <h3>Order Activity</h3>
+                    <div class="order-empty-message"><p>Your order history will appear after sign-in</p><span>No order data is connected in this preview.</span></div>
+                </div>
+                <div class="order-stages">
+                    <p>Order stages · preview</p>
+                    <ol aria-label="Order stages, no active order">
+                        <li>Order review</li><li>Payment verification</li><li>Allocation</li><li>Delivery</li>
+                    </ol>
+                </div>
+            </div>
+            <p class="dashboard-security">Never share your seed phrase or private key</p>
         </section>
 
     </main>
 
     <!-- FOOTER -->
     <footer class="w-full text-center py-5 text-[11px] text-gray-500 border-t border-purple-900/30 space-y-0.5">
-        <p>Never share your seed phrase or private key[span_36](start_span)[span_36](end_span)</p>
+        <p>Never share your seed phrase or private key</p>
         <p>&copy; 2026 VOIN Technology Payments Platform. All rights reserved.</p>
     </footer>
 
